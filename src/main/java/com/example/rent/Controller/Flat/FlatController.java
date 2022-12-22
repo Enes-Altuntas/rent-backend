@@ -28,7 +28,6 @@ public class FlatController {
     private final UpdateFlatRequestToDTO updateFlatRequestToDTO;
     private final GetFlatResponseFromDTOMapper getFlatResponseFromDTOMapper;
 
-    //DENEME
     @PostMapping
     public ResponseEntity<GetFlatResponse> saveFlat(@RequestBody @Valid CreateFlatRequest createFlatRequest) {
         CreateFlatDTO createFlatDTO = createFlatRequestToDTOEntityMapper.fromRequestToDTO(createFlatRequest);
