@@ -15,6 +15,7 @@ import java.util.List;
 @Setter
 @RequiredArgsConstructor
 public class Apartment extends BaseEntity {
+    //Deneme
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
     @SequenceGenerator(name = "GEN_APARTMENT", sequenceName = "SEQ_APARTMENT", allocationSize = 1)
