@@ -1,0 +1,46 @@
+INSERT INTO APARTMENTS (ID, APARTMENT_NAME, APARTMENT_NUMBER, STREET_NAME, NEIGHBORHOOD, CITY, STATE, CREATED_AT)
+VALUES (99990, 'Barış', 6, 'Başak', 'Yeşilyurt', 'Istanbul', 'Bakırköy', NOW()),
+       (99991, 'Şerifoğlu', 65, 'Esenlik', 'Ünalan', 'Istanbul', 'Üsküdar', NOW()),
+       (99992, 'Arzu', 7, 'Sipahioğlu', 'Yeşilyurt', 'Istanbul', 'Bakırköy', NOW());
+
+INSERT INTO CURRENCIES (ID, CURRENCY_VALUE)
+VALUES (99990, 'TRY'),
+       (99991, 'EUR'),
+       (99992, 'USD');
+
+INSERT INTO FLAT_TYPES (ID, FLAT_TYPE_VALUE)
+VALUES (99990, '1+1'),
+       (99991, '2+1'),
+       (99992, '3+1'),
+       (99993, '4+1');
+
+INSERT INTO FLAT_CONTRACTS (ID, START_DATE, END_DATE, PAYMENT_DUE)
+VALUES (99990, '2022-12-1 12:00:00', '2023-12-1 12:00:00', 10);
+
+INSERT INTO RENTERS (ID, TC_NO, NAME, PHONE_NUMBER, CREATED_AT, RENTER_CODE, EMAIL, ACTIVE)
+VALUES (99990, '32728806152', 'Enes Altuntaş', '+905536739261', NOW(), 'BAYEBABA152', 'enesaltuntas92@gmail.com', true);
+
+INSERT INTO FLATS (ID, FLAT_NUMBER, FLAT_PRICE, FLAT_AREA, CREATED_AT, FLATTYPE_ID, CURRENCY_ID, APARTMENT_ID,
+                   FLAT_CONTRACT_ID, RENTER_ID)
+VALUES (99990, 1, 1500, '100', NOW(), 99990, 99990, 99990, 99990, 99990),
+       (99991, 2, 2500, '120', NOW(), 99991, 99991, 99990, null, null),
+       (99992, 3, 3500, '150', NOW(), 99992, 99992, 99990, null, null),
+       (99993, 1, 7500, '240', NOW(), 99993, 99992, 99991, null, null);
+
+INSERT INTO LANDS (ID, CREATED_AT, ADA_NO, NEIGHBOURHOOD, PARSEL_NO, PRICE, PROVINCE, STATE)
+VALUES (99990, NOW(), 75, 'Yeşilyurt', 1452, 7500000, 'Bakırköy', 'İstanbul'),
+       (99991, NOW(), 75, 'Ünalan', 1452, 7500000, 'Üsküdar', 'İstanbul'),
+       (99992, NOW(), 75, 'Atatürk', 1452, 7500000, 'Büyükçekmece', 'İstanbul');
+
+INSERT INTO OWNERS (ID, CREATED_AT, NAME, PHONE_NUMBER, TCKN)
+VALUES (99990, NOW(), 'Mehmet Emin Selek', '+905312668488', '44458354636'),
+       (99991, NOW(), 'Enes Altuntaş', '+905536739261', '32728806152'),
+       (99992, NOW(), 'Mehmet Selek', '5422668488', '11111111111');
+
+INSERT INTO LANDS_OWNERS (owner_id, land_id)
+VALUES (99990, 99990),
+       (99990, 99991),
+       (99990, 99992),
+       (99991, 99992),
+       (99992, 99991),
+       (99990, 99992);
