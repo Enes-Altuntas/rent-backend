@@ -1,6 +1,7 @@
 package com.example.rent.Entity.File;
 
 import com.example.rent.Entity.Payment.Payment;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "FILES")
 @Getter
 @Setter
+@EqualsAndHashCode
 @RequiredArgsConstructor
 public class File {
 

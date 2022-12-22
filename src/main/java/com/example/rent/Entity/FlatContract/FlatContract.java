@@ -2,6 +2,7 @@ package com.example.rent.Entity.FlatContract;
 
 import com.example.rent.Entity.Flat.Flat;
 import com.example.rent.Entity.Payment.Payment;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.List;
 @Table(name = "FLAT_CONTRACTS")
 @Getter
 @Setter
+@EqualsAndHashCode
 @RequiredArgsConstructor
 public class FlatContract {
 

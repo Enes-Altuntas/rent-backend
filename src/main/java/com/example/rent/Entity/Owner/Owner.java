@@ -2,6 +2,7 @@ package com.example.rent.Entity.Owner;
 
 import com.example.rent.Entity.Base.BaseEntity;
 import com.example.rent.Entity.Land.Land;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.util.List;
 @Table(name = "OWNERS")
 @Getter
 @Setter
+@EqualsAndHashCode
 @RequiredArgsConstructor
 public class Owner extends BaseEntity {
 
