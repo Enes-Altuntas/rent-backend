@@ -6,11 +6,9 @@ import com.example.rent.DTO.Apartment.Update.UpdateApartmentDTO;
 import com.example.rent.Mapper.Apartment.Create.CreateApartmentRequestToDTOMapper;
 import com.example.rent.Mapper.Apartment.Get.GetApartmentResponseFromDTOMapper;
 import com.example.rent.Mapper.Apartment.Update.UpdateApartmentRequestToDTOMapper;
-import com.example.rent.Mapper.Apartment.Update.UpdateApartmentResponseFromDTOMapper;
 import com.example.rent.Request.Apartment.CreateApartmentRequest;
 import com.example.rent.Request.Apartment.UpdateApartmentRequest;
 import com.example.rent.Response.Apartment.GetApartmentResponse;
-import com.example.rent.Response.Apartment.UpdateApartmentResponse;
 import com.example.rent.Service.Apartment.ApartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,7 +26,6 @@ public class ApartmentController {
     private final ApartmentService apartmentService;
     private final CreateApartmentRequestToDTOMapper createApartmentRequestToDTOEntityMapper;
     private final GetApartmentResponseFromDTOMapper getApartmentResponseFromDTOMapper;
-    private final UpdateApartmentResponseFromDTOMapper updateApartmentResponseFromDTOMapper;
     private final UpdateApartmentRequestToDTOMapper updateApartmentRequestToDTOMapper;
 
     @PostMapping
@@ -52,14 +49,14 @@ public class ApartmentController {
     }
 
     @PutMapping
-    public ResponseEntity<UpdateApartmentResponse> UpdateApartmentDTO(@Valid @RequestBody UpdateApartmentRequest updateApartmentRequest) {
+    public ResponseEntity<GetApartmentResponse> UpdateApartmentDTO(@Valid @RequestBody UpdateApartmentRequest updateApartmentRequest) {
         UpdateApartmentDTO updateApartmentDTO = updateApartmentRequestToDTOMapper.fromRequestToDTO(updateApartmentRequest);
 
-        UpdateApartmentDTO apartmentDTO = apartmentService.updateApartment(updateApartmentDTO);
+        GetApartmentDTO apartmentDTO = apartmentService.updateApartment(updateApartmentDTO);
 
-        UpdateApartmentResponse updateApartmentResponse = updateApartmentResponseFromDTOMapper.fromDTOToResponse(apartmentDTO);
+        GetApartmentResponse getApartmentResponse = getApartmentResponseFromDTOMapper.fromDTOToResponse(apartmentDTO);
 
-        return new ResponseEntity<>(updateApartmentResponse, HttpStatus.OK);
+        return new ResponseEntity<>(getApartmentResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

@@ -6,6 +6,7 @@ import com.example.rent.Entity.Currency.Currency;
 import com.example.rent.Entity.FlatContract.FlatContract;
 import com.example.rent.Entity.FlatType.FlatType;
 import com.example.rent.Entity.Renter.Renter;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -16,6 +17,7 @@ import javax.persistence.*;
 @Table(name = "FLATS")
 @Getter
 @Setter
+@EqualsAndHashCode
 @RequiredArgsConstructor
 public class Flat extends BaseEntity {
 

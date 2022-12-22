@@ -13,6 +13,6 @@ public interface ApartmentService {
 
     List<GetApartmentDTO> getAllApartments();
 
-    UpdateApartmentDTO updateApartment(UpdateApartmentDTO updateApartmentDTO);
+    GetApartmentDTO updateApartment(UpdateApartmentDTO updateApartmentDTO);
 
 }

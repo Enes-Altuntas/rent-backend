@@ -3,6 +3,7 @@ package com.example.rent.Entity.Renter;
 import com.example.rent.Entity.Base.BaseEntity;
 import com.example.rent.Entity.Flat.Flat;
 import com.example.rent.Entity.Payment.Payment;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.List;
 @Table(name = "RENTERS")
 @Getter
 @Setter
+@EqualsAndHashCode
 @RequiredArgsConstructor
 public class Renter extends BaseEntity {
 

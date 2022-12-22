@@ -5,7 +5,6 @@ import com.example.rent.DTO.Apartment.Get.GetApartmentDTO;
 import com.example.rent.DTO.Apartment.Update.UpdateApartmentDTO;
 import com.example.rent.Entity.Apartment.Apartment;
 import com.example.rent.Mapper.Apartment.Get.GetApartmentDTOFromEntityMapper;
-import com.example.rent.Mapper.Apartment.Update.UpdateApartmentDTOFromEntityMapper;
 import com.example.rent.Repository.Apartment.ApartmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,6 @@ import java.util.NoSuchElementException;
 public class ApartmentServiceImpl implements ApartmentService {
 
     private final ApartmentRepository apartmentRepository;
-    private final UpdateApartmentDTOFromEntityMapper updateApartmentDTOFromEntityMapper;
     private final GetApartmentDTOFromEntityMapper getApartmentDTOFromEntityMapper;
 
     @Override
@@ -58,7 +56,7 @@ public class ApartmentServiceImpl implements ApartmentService {
     }
 
     @Override
-    public UpdateApartmentDTO updateApartment(UpdateApartmentDTO updateApartmentDTO) {
+    public GetApartmentDTO updateApartment(UpdateApartmentDTO updateApartmentDTO) {
         Apartment apartment = apartmentRepository.findById(updateApartmentDTO.getApartmentId())
                 .orElseThrow(() -> new NoSuchElementException("Apartman bulunamadı!"));
 
@@ -71,7 +69,7 @@ public class ApartmentServiceImpl implements ApartmentService {
 
         Apartment updatedApartment = apartmentRepository.save(apartment);
 
-        return updateApartmentDTOFromEntityMapper.fromEntityToDTO(updatedApartment);
+        return getApartmentDTOFromEntityMapper.fromEntityToDTO(updatedApartment);
     }
 
 
