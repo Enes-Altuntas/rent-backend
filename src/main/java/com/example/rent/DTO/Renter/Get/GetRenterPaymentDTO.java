@@ -17,8 +17,6 @@ public class GetRenterPaymentDTO {
 
     private GetRenterFileDTO file;
 
-    private Integer flatNumber;
-
     private Date paymentDate;
 
     private String address;
