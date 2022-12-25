@@ -19,6 +19,8 @@ public class GetRenterDTO {
 
     private String tckn;
 
+    private String iban;
+
     private String nameSurname;
 
     private String email;
