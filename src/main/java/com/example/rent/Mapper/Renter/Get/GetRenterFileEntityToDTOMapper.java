@@ -20,7 +20,7 @@ public interface GetRenterFileEntityToDTOMapper extends BaseEntityMapper<File, G
     default String getURL(Integer id) {
         return ServletUriComponentsBuilder
                 .fromCurrentContextPath()
-                .path("/files/")
+                .path("/api/v1/files/")
                 .path(id.toString())
                 .toUriString();
     }
