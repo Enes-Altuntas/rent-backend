@@ -31,7 +31,10 @@ public class Renter extends BaseEntity {
     @Column(name = "TC_NO", nullable = false, unique = true)
     private String tckn;
 
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "IBAN", nullable = false, unique = true, length = 26)
+    private String iban;
+
+    @Column(name = "NAMESURNAME", nullable = false)
     private String nameSurname;
 
     @Column(name = "EMAIL")
