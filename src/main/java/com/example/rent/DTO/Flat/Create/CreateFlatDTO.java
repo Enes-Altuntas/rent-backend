@@ -17,4 +17,22 @@ public class CreateFlatDTO {
 
     private Integer currencyId;
 
+    private String contactNameSurname;
+
+    private String contactEmail;
+
+    private String contactTckn;
+
+    private String contactBankName;
+
+    private String contactBankBranch;
+
+    private Integer contactAccountNumber;
+
+    private String contactIban;
+
+    private String contactPhoneNumber;
+
+    private String contactAddress;
+
 }
