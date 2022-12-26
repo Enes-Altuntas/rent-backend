@@ -41,6 +41,4 @@ public class Payment extends BaseEntity {
     @JoinColumn(name = "RENTER_ID")
     private Renter renter;
 
-    //TODO resmi ve gayriresmi enum
-
 }
