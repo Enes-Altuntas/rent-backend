@@ -8,4 +8,5 @@ public interface BaseEntityMapper<Entity, DTO> {
 
     List<DTO> fromEntityListToDTOList(List<Entity> entities);
 
+
 }
