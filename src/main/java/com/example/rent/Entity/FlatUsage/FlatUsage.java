@@ -14,6 +14,7 @@ import javax.persistence.*;
 @EqualsAndHashCode
 @RequiredArgsConstructor
 public class FlatUsage {
+
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
     @SequenceGenerator(name = "GEN_FLAT_USAGE_TYPE", sequenceName = "SEQ_FLAT_USAGE_TYPE", allocationSize = 1)

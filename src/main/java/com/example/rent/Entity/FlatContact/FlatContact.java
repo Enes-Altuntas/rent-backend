@@ -41,15 +41,6 @@ public class FlatContact extends BaseEntity {
     @Column(name = "ADDRESS", nullable = false)
     private String address;
 
-    @Column(name = "BANK",nullable = false)
-    private String bankName;
-
-    @Column(name = "BRANCH",nullable = false)
-    private String branch;
-
-    @Column(name = "ACCOUNT_NUMBER",nullable = false)
-    private Integer accountNumber;
-
     @OneToOne(mappedBy = "flatContact")
     private Flat flat;
 }

@@ -25,7 +25,6 @@ public class FlatUsage {
 
     @GetMapping()
     public ResponseEntity<List<FlatUsageResponse>> getAll(){
-
         List<FlatUsageDTO> flatUsageDTOList = flatUsageService.getAll();
         List<FlatUsageResponse> flatUsageResponseList = flatUsageResponseFromDTOMapper.fromDTOListToResponseList(flatUsageDTOList);
 

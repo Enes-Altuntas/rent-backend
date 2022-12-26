@@ -14,7 +14,6 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class FlatUsageImpl implements FlatUsageService {
-
     private final FlatUsageRepository flatUsageRepository;
 
     private final FlatUsageDTOFromEntityMapper flatUsageDTOFromEntityMapper;
@@ -22,7 +21,9 @@ public class FlatUsageImpl implements FlatUsageService {
     @Override
     public List<FlatUsageDTO> getAll() {
         List<FlatUsage> flatUsages = flatUsageRepository.findAll();
+
         List<FlatUsageDTO> flatUsageDTOList = flatUsageDTOFromEntityMapper.fromEntityListToDTOList(flatUsages);
+
         return flatUsageDTOList;
     }
 }
