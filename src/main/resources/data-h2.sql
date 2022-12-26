@@ -45,3 +45,8 @@ VALUES (99990, 99990),
        (99991, 99992),
        (99992, 99991),
        (99990, 99992);
+
+INSERT INTO FLAT_USAGE_TYPE(ID,USAGE_VALUE)
+VALUES (99990,'Ofis'),
+       (99991,'Mesken'),
+       (99992,'Air BNB');
