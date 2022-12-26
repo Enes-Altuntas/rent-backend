@@ -13,5 +13,6 @@ public class FlatUsageResponse {
     private Integer flatUsageId;
 
     private String usageValue;
+
 }
 
