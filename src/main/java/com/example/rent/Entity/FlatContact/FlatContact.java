@@ -24,31 +24,31 @@ public class FlatContact extends BaseEntity {
     private Integer id;
 
     @Column(name = "NAMESURNAME", nullable = false)
-    private String nameSurname;
+    private String contactNameSurname;
 
     @Column(name = "EMAIL")
-    private String email;
+    private String contactEmail;
 
     @Column(name = "TC_NO", nullable = false, unique = true)
-    private String tckn;
+    private String contactTckn;
 
     @Column(name = "BANK", nullable = false)
-    private String bankName;
+    private String contactBankName;
 
     @Column(name = "BRANCH", nullable = false)
-    private String branch;
+    private String contactBankBranch;
 
     @Column(name = "ACCOUNT_NUMBER", nullable = false)
-    private Integer accountNumber;
+    private Integer contactAccountNumber;
 
     @Column(name = "IBAN", nullable = false, unique = true, length = 26)
-    private String iban;
+    private String contactIban;
 
     @Column(name = "PHONE_NUMBER", nullable = false)
-    private String phoneNumber;
+    private String contactPhoneNumber;
 
     @Column(name = "ADDRESS", nullable = false)
-    private String address;
+    private String contactAddress;
 
     @OneToOne(mappedBy = "flatContact")
     private Flat flat;
