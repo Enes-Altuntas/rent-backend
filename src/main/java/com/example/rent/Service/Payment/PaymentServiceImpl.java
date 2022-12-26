@@ -46,7 +46,7 @@ public class PaymentServiceImpl implements PaymentService {
 
         try {
             File file = new File();
-            file.setName(multipartFile.getName());
+            file.setName(multipartFile.getOriginalFilename());
             file.setType(multipartFile.getContentType());
             file.setData(multipartFile.getBytes());
             savedFile = fileRepository.save(file);
