@@ -44,7 +44,7 @@ public class Renter extends BaseEntity {
     private String phoneNumber;
 
     @Column(name = "ACTIVE", nullable = false)
-    private boolean isActive = true;
+    private boolean active = true;
 
     @OneToMany(mappedBy = "renter")
     private List<Flat> flatList;

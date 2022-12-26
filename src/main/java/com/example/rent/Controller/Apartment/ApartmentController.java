@@ -29,14 +29,14 @@ public class ApartmentController {
     private final UpdateApartmentRequestToDTOMapper updateApartmentRequestToDTOMapper;
 
     @PostMapping
-    public ResponseEntity<GetApartmentResponse> saveApartment(@RequestBody @Valid CreateApartmentRequest createApartmentRequest) {
+    public ResponseEntity<List<GetApartmentResponse>> saveApartment(@RequestBody @Valid CreateApartmentRequest createApartmentRequest) {
         CreateApartmentDTO createApartmentDTO = createApartmentRequestToDTOEntityMapper.fromRequestToDTO(createApartmentRequest);
 
-        GetApartmentDTO apartmentDTO = apartmentService.saveApartment(createApartmentDTO);
+        List<GetApartmentDTO> getApartmentDTOList = apartmentService.saveApartment(createApartmentDTO);
 
-        GetApartmentResponse getApartmentResponse = getApartmentResponseFromDTOMapper.fromDTOToResponse(apartmentDTO);
+        List<GetApartmentResponse> getApartmentResponseList = getApartmentResponseFromDTOMapper.fromDTOListToResponseList(getApartmentDTOList);
 
-        return new ResponseEntity<>(getApartmentResponse, HttpStatus.CREATED);
+        return new ResponseEntity<>(getApartmentResponseList, HttpStatus.OK);
     }
 
     @GetMapping
@@ -49,21 +49,24 @@ public class ApartmentController {
     }
 
     @PutMapping
-    public ResponseEntity<GetApartmentResponse> UpdateApartmentDTO(@Valid @RequestBody UpdateApartmentRequest updateApartmentRequest) {
+    public ResponseEntity<List<GetApartmentResponse>> updateApartmentDTO(@Valid @RequestBody UpdateApartmentRequest updateApartmentRequest) {
         UpdateApartmentDTO updateApartmentDTO = updateApartmentRequestToDTOMapper.fromRequestToDTO(updateApartmentRequest);
 
-        GetApartmentDTO apartmentDTO = apartmentService.updateApartment(updateApartmentDTO);
+        List<GetApartmentDTO> getApartmentDTOList = apartmentService.updateApartment(updateApartmentDTO);
 
-        GetApartmentResponse getApartmentResponse = getApartmentResponseFromDTOMapper.fromDTOToResponse(apartmentDTO);
+        List<GetApartmentResponse> getApartmentResponseList = getApartmentResponseFromDTOMapper
+                .fromDTOListToResponseList(getApartmentDTOList);
 
-        return new ResponseEntity<>(getApartmentResponse, HttpStatus.OK);
+        return new ResponseEntity<>(getApartmentResponseList, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Integer> deleteApartment(@PathVariable Integer id) {
-        apartmentService.deleteApartment(id);
+    public ResponseEntity<List<GetApartmentResponse>> deleteApartment(@PathVariable Integer id) {
+        List<GetApartmentDTO> getApartmentDTOList = apartmentService.deleteApartment(id);
 
-        return new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
+        List<GetApartmentResponse> getApartmentResponseList = getApartmentResponseFromDTOMapper
+                .fromDTOListToResponseList(getApartmentDTOList);
+
+        return new ResponseEntity<>(getApartmentResponseList, HttpStatus.OK);
     }
-
 }

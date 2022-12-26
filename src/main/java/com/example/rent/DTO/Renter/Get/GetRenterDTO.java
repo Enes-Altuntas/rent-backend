@@ -27,7 +27,7 @@ public class GetRenterDTO {
 
     private String phoneNumber;
 
-    private boolean isActive;
+    private boolean active;
 
     private List<GetRenterFlatDTO> flatList;
 

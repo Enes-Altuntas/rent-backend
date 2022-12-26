@@ -27,7 +27,7 @@ public class GetRenterResponse {
 
     private String phoneNumber;
 
-    private boolean isActive;
+    private boolean active;
 
     private List<GetRenterFlatResponse> flatList;
 

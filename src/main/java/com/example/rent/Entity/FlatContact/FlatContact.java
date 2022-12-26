@@ -32,6 +32,15 @@ public class FlatContact extends BaseEntity {
     @Column(name = "TC_NO", nullable = false, unique = true)
     private String tckn;
 
+    @Column(name = "BANK", nullable = false)
+    private String bankName;
+
+    @Column(name = "BRANCH", nullable = false)
+    private String branch;
+
+    @Column(name = "ACCOUNT_NUMBER", nullable = false)
+    private Integer accountNumber;
+
     @Column(name = "IBAN", nullable = false, unique = true, length = 26)
     private String iban;
 

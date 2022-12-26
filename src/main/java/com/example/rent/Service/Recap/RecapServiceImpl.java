@@ -19,7 +19,7 @@ public class RecapServiceImpl implements RecapService {
 
     @Override
     public List<GetRecapDTO> getRecap() {
-        List<Renter> renterList = renterRepository.findAllByIsActiveIsTrue();
+        List<Renter> renterList = renterRepository.findAllByActiveIsTrue();
         List<GetRecapDTO> getRecapDTOList = getRecapRentDTOFromEntityMapper.fromEntityListToDTOList(renterList);
         return getRecapDTOList;
     }
