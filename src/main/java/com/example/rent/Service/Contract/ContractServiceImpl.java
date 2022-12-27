@@ -2,11 +2,12 @@ package com.example.rent.Service.Contract;
 
 import com.example.rent.DTO.Contract.Create.CreateContractDTO;
 import com.example.rent.DTO.Contract.Delete.DeleteContractDTO;
+import com.example.rent.DTO.Renter.Get.GetRenterFlatDTO;
 import com.example.rent.Entity.Flat.Flat;
 import com.example.rent.Entity.FlatContract.FlatContract;
 import com.example.rent.Entity.Renter.Renter;
 import com.example.rent.Mapper.Contract.Create.CreateContractEntityToDTOMapper;
-import com.example.rent.Mapper.Contract.Delete.DeleteContractEntityToDTOMapper;
+import com.example.rent.Mapper.Renter.Get.GetRenterFlatEntityToDTOMapper;
 import com.example.rent.Repository.Flat.FlatRepository;
 import com.example.rent.Repository.FlatContract.FlatContractRepository;
 import com.example.rent.Repository.Renter.RenterRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -26,10 +28,10 @@ public class ContractServiceImpl implements ContractService {
     private final RenterRepository renterRepository;
     private final FlatContractRepository flatContractRepository;
     private final CreateContractEntityToDTOMapper createContractEntityToDTOMapper;
-    private final DeleteContractEntityToDTOMapper deleteContractEntityToDTOMapper;
+    private final GetRenterFlatEntityToDTOMapper getRenterFlatEntityToDTOMapper;
 
     @Override
-    public CreateContractDTO createContract(CreateContractDTO createContractDTO) {
+    public List<GetRenterFlatDTO> createContract(CreateContractDTO createContractDTO) {
         Flat flat = flatRepository.findById(createContractDTO.getFlatId())
                 .orElseThrow(() -> new NoSuchElementException("Daire bulunamadı!"));
 
@@ -54,27 +56,28 @@ public class ContractServiceImpl implements ContractService {
         Flat savedFlat = flatRepository.save(flat);
 
         setCodeToRenter(renter, savedFlat);
-        renterRepository.save(renter);
+        renterRepository.saveAndFlush(renter);
 
-        return createContractEntityToDTOMapper.fromEntityToDTO(savedFlat);
+        return getRenterFlatEntityToDTOMapper.fromEntityListToDTOList(renter.getFlatList());
     }
 
     @Override
-    public DeleteContractDTO deleteContract(DeleteContractDTO deleteContractDTO) {
+    public List<GetRenterFlatDTO> deleteContract(DeleteContractDTO deleteContractDTO) {
         Flat flat = flatRepository.findById(deleteContractDTO.getFlatId())
                 .orElseThrow(() -> new NoSuchElementException("Daire bulunamadı!"));
 
+        Renter renter = flat.getRenter();
+
         flatContractRepository.delete(flat.getFlatContract());
         flat.setFlatContract(null);
-
-        Renter renter = flat.getRenter();
-        renter.setCode(null);
-        renterRepository.save(renter);
-
         flat.setRenter(null);
-        Flat savedFlat = flatRepository.save(flat);
+        flatRepository.save(flat);
 
-        return deleteContractEntityToDTOMapper.fromEntityToDTO(savedFlat);
+        renter.setCode(null);
+        renterRepository.saveAndFlush(renter);
+
+
+        return getRenterFlatEntityToDTOMapper.fromEntityListToDTOList(renter.getFlatList());
     }
 
     public void setCodeToRenter(Renter renter, Flat flat) {

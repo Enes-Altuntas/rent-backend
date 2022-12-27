@@ -29,49 +29,33 @@ public class FlatController {
     private final GetFlatResponseFromDTOMapper getFlatResponseFromDTOMapper;
 
     @PostMapping
-    public ResponseEntity<GetFlatResponse> saveFlat(@RequestBody @Valid CreateFlatRequest createFlatRequest) {
+    public ResponseEntity<List<GetFlatResponse>> saveFlat(@RequestBody @Valid CreateFlatRequest createFlatRequest) {
         CreateFlatDTO createFlatDTO = createFlatRequestToDTOEntityMapper.fromRequestToDTO(createFlatRequest);
 
-        GetFlatDTO getFlatDTO = flatService.saveFlat(createFlatDTO);
+        List<GetFlatDTO> getFlatDTOS = flatService.saveFlat(createFlatDTO);
 
-        GetFlatResponse getFlatResponse = getFlatResponseFromDTOMapper.fromDTOToResponse(getFlatDTO);
+        List<GetFlatResponse> getFlatResponses = getFlatResponseFromDTOMapper.fromDTOListToResponseList(getFlatDTOS);
 
-        return new ResponseEntity<>(getFlatResponse, HttpStatus.CREATED);
+        return new ResponseEntity<>(getFlatResponses, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Integer> deleteFlat(@PathVariable Integer id) {
-        flatService.deleteFlat(id);
+    public ResponseEntity<List<GetFlatResponse>> deleteFlat(@PathVariable Integer id) {
+        List<GetFlatDTO> getFlatDTOS = flatService.deleteFlat(id);
 
-        return new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
+        List<GetFlatResponse> getFlatResponses = getFlatResponseFromDTOMapper.fromDTOListToResponseList(getFlatDTOS);
+
+        return new ResponseEntity<>(getFlatResponses, HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<GetFlatResponse> updateFlat(@RequestBody @Valid UpdateFlatRequest updateFlatRequest) {
+    public ResponseEntity<List<GetFlatResponse>> updateFlat(@RequestBody @Valid UpdateFlatRequest updateFlatRequest) {
         UpdateFlatDTO updateFlatDTO = updateFlatRequestToDTO.fromRequestToDTO(updateFlatRequest);
 
-        GetFlatDTO getFlatDTO = flatService.updateFlat(updateFlatDTO);
+        List<GetFlatDTO> getFlatDTOS = flatService.updateFlat(updateFlatDTO);
 
-        GetFlatResponse getFlatResponse = getFlatResponseFromDTOMapper.fromDTOToResponse(getFlatDTO);
+        List<GetFlatResponse> getFlatResponses = getFlatResponseFromDTOMapper.fromDTOListToResponseList(getFlatDTOS);
 
-        return new ResponseEntity<>(getFlatResponse, HttpStatus.OK);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<GetFlatResponse>> getAllFlats() {
-        List<GetFlatDTO> getFlatDTOList = flatService.getAllFlat();
-
-        List<GetFlatResponse> getFlatResponseList = getFlatResponseFromDTOMapper.fromDTOListToResponseList(getFlatDTOList);
-
-        return new ResponseEntity<>(getFlatResponseList, HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<GetFlatResponse> getFlat(@PathVariable Integer id) {
-        GetFlatDTO getFlatDTO = flatService.getFlat(id);
-
-        GetFlatResponse getFlatResponse = getFlatResponseFromDTOMapper.fromDTOToResponse(getFlatDTO);
-
-        return new ResponseEntity<>(getFlatResponse, HttpStatus.OK);
+        return new ResponseEntity<>(getFlatResponses, HttpStatus.OK);
     }
 }

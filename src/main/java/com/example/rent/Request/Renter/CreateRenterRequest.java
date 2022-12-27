@@ -27,4 +27,7 @@ public class CreateRenterRequest {
     @NotBlank(message = "Telefon numarası alanı boş bırakılamaz!")
     private String phoneNumber;
 
+    @NotBlank(message = "IBAN alanı boş bırakılamaz!")
+    private String iban;
+
 }

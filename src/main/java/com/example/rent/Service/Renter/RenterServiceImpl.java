@@ -27,6 +27,11 @@ public class RenterServiceImpl implements RenterService {
     public GetRenterDTO saveRenter(CreateRenterDTO createRenterDTO) {
         if (!validateTCKN(createRenterDTO.getTckn())) {
             throw new CustomInvalidFieldException("Hatalı T.C. kimlik no!");
+        } else {
+            Optional<Renter> checkRenter = renterRepository.findByTckn(createRenterDTO.getTckn());
+            if (checkRenter.isPresent()) {
+                throw new CustomInvalidFieldException("Aynı T.C. kimlik no ile birden fazla kiracı yaratılamaz!");
+            }
         }
 
         Renter renter = new Renter();
@@ -35,6 +40,7 @@ public class RenterServiceImpl implements RenterService {
         renter.setTckn(createRenterDTO.getTckn());
         renter.setNameSurname(createRenterDTO.getNameSurname());
         renter.setPhoneNumber(createRenterDTO.getPhoneNumber());
+        renter.setIban(createRenterDTO.getIban());
         renter.setFlatList(new ArrayList<>());
         renter.setPayments(new ArrayList<>());
 

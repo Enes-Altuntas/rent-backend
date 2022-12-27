@@ -19,4 +19,6 @@ public class CreateRenterDTO {
 
     private String phoneNumber;
 
+    private String iban;
+
 }

@@ -7,14 +7,12 @@ import com.example.rent.DTO.Flat.Update.UpdateFlatDTO;
 import java.util.List;
 
 public interface FlatService {
-    GetFlatDTO saveFlat(CreateFlatDTO createFlatDTO);
+    List<GetFlatDTO> saveFlat(CreateFlatDTO createFlatDTO);
 
-    void deleteFlat(Integer id);
+    List<GetFlatDTO> deleteFlat(Integer id);
 
-    GetFlatDTO updateFlat(UpdateFlatDTO updateFlatDTO);
+    List<GetFlatDTO> updateFlat(UpdateFlatDTO updateFlatDTO);
 
-    List<GetFlatDTO> getAllFlat();
-
-    GetFlatDTO getFlat(Integer id);
+    List<GetFlatDTO> getAllFlatsOfApartment(Integer apartmentId);
 
 }
