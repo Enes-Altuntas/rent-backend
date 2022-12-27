@@ -21,6 +21,12 @@ public class GetRecapFlatDTO {
 
     private Integer flatPrice;
 
+    private String flatType;
+
+    private String currency;
+
+    private String flatArea;
+
     private Date endDate;
 
     private String status;

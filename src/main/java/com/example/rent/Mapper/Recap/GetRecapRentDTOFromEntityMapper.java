@@ -11,6 +11,8 @@ public interface GetRecapRentDTOFromEntityMapper extends BaseEntityMapper<Renter
 
     @Mapping(source = "nameSurname",target = "renterName")
     @Mapping(source = "code",target = "renterCode")
+    @Mapping(source = "id",target = "renterId")
     @Override
     GetRecapDTO fromEntityToDTO(Renter renter);
+
 }

@@ -24,6 +24,7 @@ public class GetFlatRecapResponse {
 
     private String flatArea;
 
-    private GetApartmentRenterResponse renter;
+    private String status;
+
 
 }

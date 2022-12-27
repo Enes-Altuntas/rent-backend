@@ -14,7 +14,7 @@ import javax.persistence.Enumerated;
 @NoArgsConstructor
 public class GetRecapRequest {
 
-    private Integer renterCode;
+    private String renterCode;
 
     private String renterName;
 
