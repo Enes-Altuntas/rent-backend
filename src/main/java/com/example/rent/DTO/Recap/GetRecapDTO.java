@@ -2,8 +2,6 @@ package com.example.rent.DTO.Recap;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 public class GetRecapDTO {
 
@@ -13,6 +11,8 @@ public class GetRecapDTO {
 
     private String renterName;
 
-    private List<GetRecapFlatDTO> flatList;
+    private String address;
+
+    private String paymentStatus;
 
 }
