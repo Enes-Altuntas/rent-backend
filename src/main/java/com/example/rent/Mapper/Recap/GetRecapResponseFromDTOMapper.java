@@ -6,5 +6,5 @@ import com.example.rent.Response.Recap.GetRecapResponse;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface GetRecapFlatResponseFromDTOMapper extends BaseResponseMapper<GetRecapDTO, GetRecapResponse> {
+public interface GetRecapResponseFromDTOMapper extends BaseResponseMapper<GetRecapResponse, GetRecapDTO> {
 }

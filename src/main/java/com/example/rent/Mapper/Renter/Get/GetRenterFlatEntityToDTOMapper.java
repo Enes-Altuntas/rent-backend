@@ -25,7 +25,7 @@ public interface GetRenterFlatEntityToDTOMapper extends BaseEntityMapper<Flat, G
                 " Sok. " +
                 apartment.getApartmentName() +
                 " Apt. " +
-                "No. " +
+                "No." +
                 apartment.getNumber() +
                 " " +
                 apartment.getState() +

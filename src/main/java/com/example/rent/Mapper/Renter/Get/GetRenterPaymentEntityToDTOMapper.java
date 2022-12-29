@@ -23,7 +23,7 @@ public interface GetRenterPaymentEntityToDTOMapper extends BaseEntityMapper<Paym
                 " Sok. " +
                 flat.getApartment().getApartmentName() +
                 " Apt. " +
-                "No. " +
+                "No." +
                 flat.getApartment().getNumber() +
                 " Daire: " +
                 flat.getFlatNumber() +

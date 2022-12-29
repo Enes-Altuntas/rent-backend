@@ -11,13 +11,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GetRecapResponse {
 
+    private Integer flatId;
+
     private Integer renterId;
 
-    private Integer renterCode;
-
-    private String renterName;
-
     private String address;
+
+    private Integer flatNumber;
 
     private String paymentStatus;
 

@@ -1,9 +1,9 @@
 package com.example.rent.Service.Recap;
 
 import com.example.rent.DTO.Recap.GetRecapDTO;
-import com.example.rent.Entity.Renter.Renter;
-import com.example.rent.Mapper.Recap.GetRecapRentDTOFromEntityMapper;
-import com.example.rent.Repository.Renter.RenterRepository;
+import com.example.rent.Entity.Flat.Flat;
+import com.example.rent.Mapper.Recap.GetrRecapDTOFromEntityMapper;
+import com.example.rent.Repository.Flat.FlatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +14,13 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class RecapServiceImpl implements RecapService {
-    private final RenterRepository renterRepository;
-    private final GetRecapRentDTOFromEntityMapper getRecapRentDTOFromEntityMapper;
+    private final FlatRepository flatRepository;
+    private final GetrRecapDTOFromEntityMapper getrRecapDTOFromEntityMapper;
 
     @Override
     public List<GetRecapDTO> getRecap() {
-        List<Renter> renterList = renterRepository.findAllByActiveIsTrue();
-        List<GetRecapDTO> getRecapDTOList = getRecapRentDTOFromEntityMapper.fromEntityListToDTOList(renterList);
-        return getRecapDTOList;
+        List<Flat> flatList = flatRepository.findAll();
+
+        return getrRecapDTOFromEntityMapper.fromEntityListToDTOList(flatList);
     }
 }
