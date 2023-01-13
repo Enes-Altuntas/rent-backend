@@ -1,8 +1,8 @@
 package com.example.rent.Service.FlatUsage;
 
-import com.example.rent.DTO.FlatUsage.FlatUsageDTO;
+import com.example.rent.DTO.FlatUsage.GetFlatUsageDTO;
 import com.example.rent.Entity.FlatUsage.FlatUsage;
-import com.example.rent.Mapper.FlatUsage.FlatUsageDTOFromEntityMapper;
+import com.example.rent.Mapper.FlatUsage.GetFlatUsageDTOFromEntityMapper;
 import com.example.rent.Repository.FlatUsage.FlatUsageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,14 +16,14 @@ import java.util.List;
 public class FlatUsageImpl implements FlatUsageService {
     private final FlatUsageRepository flatUsageRepository;
 
-    private final FlatUsageDTOFromEntityMapper flatUsageDTOFromEntityMapper;
+    private final GetFlatUsageDTOFromEntityMapper getFlatUsageDTOFromEntityMapper;
 
     @Override
-    public List<FlatUsageDTO> getAll() {
+    public List<GetFlatUsageDTO> getAll() {
         List<FlatUsage> flatUsages = flatUsageRepository.findAll();
 
-        List<FlatUsageDTO> flatUsageDTOList = flatUsageDTOFromEntityMapper.fromEntityListToDTOList(flatUsages);
+        List<GetFlatUsageDTO> getFlatUsageDTOList = getFlatUsageDTOFromEntityMapper.fromEntityListToDTOList(flatUsages);
 
-        return flatUsageDTOList;
+        return getFlatUsageDTOList;
     }
 }

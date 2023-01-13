@@ -15,6 +15,8 @@ public class GetRenterPaymentDTO {
 
     private Integer paymentId;
 
+    private Integer flatId;
+
     private GetRenterFileDTO file;
 
     private Date paymentDate;

@@ -22,6 +22,9 @@ public class Currency {
     @GeneratedValue(generator = "GEN_CURRENCY", strategy = GenerationType.SEQUENCE)
     private Integer id;
 
+    @Column(name = "CURRENCY_VALUE_LONG", nullable = false)
+    private String currencyValueLong;
+
     @Column(name = "CURRENCY_VALUE", nullable = false)
     private String currencyValue;
 

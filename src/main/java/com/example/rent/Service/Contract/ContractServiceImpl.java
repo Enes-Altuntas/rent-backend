@@ -6,7 +6,6 @@ import com.example.rent.DTO.Renter.Get.GetRenterFlatDTO;
 import com.example.rent.Entity.Flat.Flat;
 import com.example.rent.Entity.FlatContract.FlatContract;
 import com.example.rent.Entity.Renter.Renter;
-import com.example.rent.Mapper.Contract.Create.CreateContractEntityToDTOMapper;
 import com.example.rent.Mapper.Renter.Get.GetRenterFlatEntityToDTOMapper;
 import com.example.rent.Repository.Flat.FlatRepository;
 import com.example.rent.Repository.FlatContract.FlatContractRepository;
@@ -15,7 +14,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -27,7 +29,6 @@ public class ContractServiceImpl implements ContractService {
     private final FlatRepository flatRepository;
     private final RenterRepository renterRepository;
     private final FlatContractRepository flatContractRepository;
-    private final CreateContractEntityToDTOMapper createContractEntityToDTOMapper;
     private final GetRenterFlatEntityToDTOMapper getRenterFlatEntityToDTOMapper;
 
     @Override
@@ -44,9 +45,12 @@ public class ContractServiceImpl implements ContractService {
 
         FlatContract flatContract = new FlatContract();
 
+        LocalDate endLocalDate = createContractDTO.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().plusYears(1);
+        Date endDate = Date.from(endLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
         flatContract.setFlat(flat);
         flatContract.setStartDate(createContractDTO.getStartDate());
-        flatContract.setEndDate(createContractDTO.getEndDate());
+        flatContract.setEndDate(endDate);
         flatContract.setPaymentDue(createContractDTO.getPaymentDue());
         flatContract.setPayment(new ArrayList<>());
         FlatContract savedContract = flatContractRepository.save(flatContract);

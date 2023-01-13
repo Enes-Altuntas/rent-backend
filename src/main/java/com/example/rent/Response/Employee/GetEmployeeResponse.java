@@ -1,4 +1,4 @@
-package com.example.rent.DTO.FlatUsage;
+package com.example.rent.Response.Employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
-public class FlatUsageDTO {
+public class GetEmployeeResponse {
 
-    private Integer flatUsageId;
+    private Integer employeeId;
 
-    private String usageValue;
+    private String nameSurname;
+
 }

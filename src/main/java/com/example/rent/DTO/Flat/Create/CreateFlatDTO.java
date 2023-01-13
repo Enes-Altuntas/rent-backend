@@ -2,6 +2,8 @@ package com.example.rent.DTO.Flat.Create;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class CreateFlatDTO {
 
@@ -17,22 +19,12 @@ public class CreateFlatDTO {
 
     private Integer currencyId;
 
-    private String contactNameSurname;
+    private Integer flatStatusId;
 
-    private String contactEmail;
+    private Integer flatUsageId;
 
-    private String contactTckn;
+    private Integer employeeId;
 
-    private String contactBankName;
-
-    private String contactBankBranch;
-
-    private Integer contactAccountNumber;
-
-    private String contactIban;
-
-    private String contactPhoneNumber;
-
-    private String contactAddress;
+    private List<Integer> ownerId;
 
 }

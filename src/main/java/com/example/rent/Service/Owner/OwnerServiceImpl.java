@@ -1,8 +1,9 @@
 package com.example.rent.Service.Owner;
 
+import com.example.rent.DTO.Flat.Get.GetFlatOwnerDTO;
 import com.example.rent.DTO.Owner.Create.CreateOwnerDTO;
-import com.example.rent.DTO.Owner.Get.GetOwnerDTO;
 import com.example.rent.Entity.Owner.Owner;
+import com.example.rent.Mapper.Flat.Get.GetFlatOwnerDTOFromEntityMapper;
 import com.example.rent.Mapper.Owner.CreateOwnerDTOFromEntityMapper;
 import com.example.rent.Repository.Owner.OwnerRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -18,6 +20,14 @@ import java.util.Objects;
 public class OwnerServiceImpl implements OwnerService {
     private final OwnerRepository ownerRepository;
     private final CreateOwnerDTOFromEntityMapper createOwnerDTOFromEntityMapper;
+    private final GetFlatOwnerDTOFromEntityMapper getFlatOwnerDTOFromEntityMapper;
+
+    @Override
+    public List<GetFlatOwnerDTO> getOwnerAsDropdown() {
+        List<Owner> owner = ownerRepository.findAll();
+
+        return getFlatOwnerDTOFromEntityMapper.fromEntityListToDTOList(owner);
+    }
 
     @Override
     public CreateOwnerDTO saveOwner(CreateOwnerDTO createOwnerDTO) {
@@ -29,8 +39,9 @@ public class OwnerServiceImpl implements OwnerService {
 
         Owner savedOwner = ownerRepository.save(owner);
 
-        return  createOwnerDTOFromEntityMapper.fromEntityToDTO(savedOwner);
+        return createOwnerDTOFromEntityMapper.fromEntityToDTO(savedOwner);
     }
+
     public boolean validateTCKN(String tckn) {
         if (tckn.length() != 11) {
             return false;

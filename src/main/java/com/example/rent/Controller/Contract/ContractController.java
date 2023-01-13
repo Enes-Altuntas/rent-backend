@@ -3,7 +3,6 @@ package com.example.rent.Controller.Contract;
 import com.example.rent.DTO.Contract.Create.CreateContractDTO;
 import com.example.rent.DTO.Contract.Delete.DeleteContractDTO;
 import com.example.rent.DTO.Renter.Get.GetRenterFlatDTO;
-import com.example.rent.Mapper.Contract.Create.CreateContractDTOToResponseMapper;
 import com.example.rent.Mapper.Contract.Create.CreateContractRequestToDTOMapper;
 import com.example.rent.Mapper.Contract.Delete.DeleteContractRequestToDTOMapper;
 import com.example.rent.Mapper.Renter.Get.GetRenterFlatDTOToResponseMapper;
@@ -26,7 +25,6 @@ import java.util.List;
 public class ContractController {
     private final ContractService contractService;
     private final CreateContractRequestToDTOMapper createContractRequestToDTOMapper;
-    private final CreateContractDTOToResponseMapper createContractDTOToResponseMapper;
     private final GetRenterFlatDTOToResponseMapper getRenterFlatDTOToResponseMapper;
     private final DeleteContractRequestToDTOMapper deleteContractRequestToDTOMapper;
 

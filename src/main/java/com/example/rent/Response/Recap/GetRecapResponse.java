@@ -1,5 +1,7 @@
 package com.example.rent.Response.Recap;
 
+import com.example.rent.Response.Employee.GetEmployeeResponse;
+import com.example.rent.Response.FlatStatus.GetFlatStatusResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,10 +17,18 @@ public class GetRecapResponse {
 
     private Integer renterId;
 
-    private String address;
-
     private Integer flatNumber;
 
+    private String apartmentName;
+
+    private String city;
+
+    private String state;
+
     private String paymentStatus;
+
+    private GetEmployeeResponse employee;
+
+    private GetFlatStatusResponse flatStatus;
 
 }

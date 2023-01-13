@@ -1,14 +1,16 @@
 package com.example.rent.Mapper.Recap;
 
 import com.example.rent.DTO.Recap.GetRecapDTO;
-import com.example.rent.Entity.Apartment.Apartment;
 import com.example.rent.Entity.Flat.Flat;
 import com.example.rent.Entity.FlatContract.FlatContract;
 import com.example.rent.Entity.Payment.Payment;
 import com.example.rent.Mapper.BaseEntityMapper;
+import com.example.rent.Mapper.Employee.GetEmployeeDTOFromEntityMapper;
+import com.example.rent.Mapper.FlatStatus.GetFlatStatusDTOFromEntityMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -16,12 +18,14 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
 
-@Mapper(componentModel = "spring")
-public interface GetrRecapDTOFromEntityMapper extends BaseEntityMapper<Flat, GetRecapDTO> {
+@Mapper(componentModel = "spring", uses = {GetEmployeeDTOFromEntityMapper.class, GetFlatStatusDTOFromEntityMapper.class})
+public interface GetRecapDTOFromEntityMapper extends BaseEntityMapper<Flat, GetRecapDTO> {
     @Mapping(source = "id", target = "flatId")
     @Mapping(source = "renter.id", target = "renterId")
     @Mapping(source = "flatNumber", target = "flatNumber")
-    @Mapping(source = "apartment", target = "address", qualifiedByName = "getAddress")
+    @Mapping(source = "apartment.apartmentName", target = "apartmentName")
+    @Mapping(source = "apartment.city", target = "city")
+    @Mapping(source = "apartment.state", target = "state")
     @Mapping(source = "flatContract", target = "paymentStatus", qualifiedByName = "getStatus")
     @Override
     GetRecapDTO fromEntityToDTO(Flat flat);
@@ -30,6 +34,14 @@ public interface GetrRecapDTOFromEntityMapper extends BaseEntityMapper<Flat, Get
     default String getStatus(FlatContract flatContract) {
         if (Objects.isNull(flatContract)) {
             return "Boş Daire";
+        }
+
+        if (flatContract.getFlat().getFlatStatus().getId().equals(99991)) {
+
+            if (!CollectionUtils.isEmpty(flatContract.getPayment())) {
+                return "Satıldı";
+            }
+
         }
 
         LocalDate currentDate = new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -57,21 +69,5 @@ public interface GetrRecapDTOFromEntityMapper extends BaseEntityMapper<Flat, Get
                 return "Kira Gecikti";
             }
         }
-    }
-
-    @Named("getAddress")
-    default String getAddress(Apartment apartment) {
-        return apartment.getNeighborhood() +
-                " Mah. " +
-                apartment.getStreetName() +
-                " Sok. " +
-                apartment.getApartmentName() +
-                " Apt. " +
-                "No." +
-                apartment.getNumber() +
-                " " +
-                apartment.getState() +
-                "/" +
-                apartment.getCity();
     }
 }

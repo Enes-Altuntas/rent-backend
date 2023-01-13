@@ -1,5 +1,6 @@
 package com.example.rent.Entity.FlatUsage;
 
+import com.example.rent.Entity.Base.BaseEntity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Setter
 @EqualsAndHashCode
 @RequiredArgsConstructor
-public class FlatUsage {
+public class FlatUsage extends BaseEntity {
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -21,6 +22,6 @@ public class FlatUsage {
     @GeneratedValue(generator = "GEN_FLAT_USAGE_TYPE", strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    @Column(name = "USAGE_VALUE",nullable = false)
+    @Column(name = "USAGE_VALUE", nullable = false)
     private String usageValue;
 }

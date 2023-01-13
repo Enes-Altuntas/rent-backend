@@ -1,10 +1,10 @@
 package com.example.rent.Service.FlatUsage;
 
-import com.example.rent.DTO.FlatUsage.FlatUsageDTO;
+import com.example.rent.DTO.FlatUsage.GetFlatUsageDTO;
 
 import java.util.List;
 
 public interface FlatUsageService {
 
-    List<FlatUsageDTO> getAll();
+    List<GetFlatUsageDTO> getAll();
 }

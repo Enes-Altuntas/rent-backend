@@ -1,4 +1,4 @@
-package com.example.rent.Response.FlatUsage;
+package com.example.rent.DTO.FlatUsage;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
-public class FlatUsageResponse {
+public class GetFlatUsageDTO {
+
     private Integer flatUsageId;
 
     private String usageValue;
-
 }
-

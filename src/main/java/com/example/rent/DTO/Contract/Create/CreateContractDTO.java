@@ -22,8 +22,6 @@ public class CreateContractDTO {
 
     private Date startDate;
 
-    private Date endDate;
-
     private Integer paymentDue;
 
     private GetApartmentRenterDTO renter;

@@ -2,38 +2,47 @@ package com.example.rent.Service.Flat;
 
 
 import com.example.rent.DTO.Flat.Create.CreateFlatDTO;
-import com.example.rent.DTO.Flat.Get.GetFlatDTO;
+import com.example.rent.DTO.Flat.Get.GetFlatApartmentDTO;
 import com.example.rent.DTO.Flat.Update.UpdateFlatDTO;
 import com.example.rent.Entity.Apartment.Apartment;
 import com.example.rent.Entity.Currency.Currency;
+import com.example.rent.Entity.Employee.Employee;
 import com.example.rent.Entity.Flat.Flat;
-import com.example.rent.Entity.FlatContact.FlatContact;
+import com.example.rent.Entity.FlatStatus.FlatStatus;
 import com.example.rent.Entity.FlatType.FlatType;
-import com.example.rent.Mapper.Flat.Get.GetFlatDTOFromEntityMapper;
+import com.example.rent.Entity.FlatUsage.FlatUsage;
+import com.example.rent.Entity.Owner.Owner;
+import com.example.rent.Mapper.Flat.Get.GetFlatApartmentDTOFromEntityMapper;
 import com.example.rent.Repository.Apartment.ApartmentRepository;
 import com.example.rent.Repository.Currency.CurrencyRepository;
+import com.example.rent.Repository.Employee.EmployeeRepository;
 import com.example.rent.Repository.Flat.FlatRepository;
+import com.example.rent.Repository.FlatStatus.FlatStatusRepository;
 import com.example.rent.Repository.FlatType.FlatTypeRepository;
+import com.example.rent.Repository.FlatUsage.FlatUsageRepository;
+import com.example.rent.Repository.Owner.OwnerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class FlatServiceImpl implements FlatService {
 
     private final FlatRepository flatRepository;
     private final ApartmentRepository apartmentRepository;
-    private final GetFlatDTOFromEntityMapper getFlatDTOFromEntityMapper;
+    private final GetFlatApartmentDTOFromEntityMapper getFlatApartmentDTOFromEntityMapper;
     private final CurrencyRepository currencyRepository;
     private final FlatTypeRepository flatTypeRepository;
+    private final FlatUsageRepository flatUsageRepository;
+    private final FlatStatusRepository flatStatusRepository;
+    private final EmployeeRepository employeeRepository;
+    private final OwnerRepository ownerRepository;
 
     @Override
-    public List<GetFlatDTO> saveFlat(CreateFlatDTO createFlatDTO) {
+    public GetFlatApartmentDTO saveFlat(CreateFlatDTO createFlatDTO) {
         Flat flat = new Flat();
         flat.setFlatNumber(createFlatDTO.getFlatNumber());
         flat.setFlatArea(createFlatDTO.getFlatArea());
@@ -51,36 +60,40 @@ public class FlatServiceImpl implements FlatService {
                 .orElseThrow(() -> new NoSuchElementException("Apartman bulunamadı!"));
         flat.setApartment(apartment);
 
-        FlatContact flatContact = new FlatContact();
-        flatContact.setContactNameSurname(createFlatDTO.getContactNameSurname());
-        flatContact.setContactAddress(createFlatDTO.getContactAddress());
-        flatContact.setContactEmail(createFlatDTO.getContactEmail());
-        flatContact.setContactIban(createFlatDTO.getContactIban());
-        flatContact.setContactAccountNumber(createFlatDTO.getContactAccountNumber());
-        flatContact.setContactTckn(createFlatDTO.getContactTckn());
-        flatContact.setContactBankBranch(createFlatDTO.getContactBankBranch());
-        flatContact.setContactBankName(createFlatDTO.getContactBankName());
-        flatContact.setContactPhoneNumber(createFlatDTO.getContactPhoneNumber());
+        List<Owner> owners = ownerRepository.findAllById(createFlatDTO.getOwnerId());
+        flat.setFlatOwners(owners);
 
-        flat.setFlatContact(flatContact);
+        FlatUsage flatUsage = flatUsageRepository.findById(createFlatDTO.getFlatUsageId())
+                .orElseThrow(() -> new NoSuchElementException("Daire kullanım tipi bulunamadı!"));
+        flat.setFlatUsage(flatUsage);
 
-        flatRepository.save(flat);
+        FlatStatus flatStatus = flatStatusRepository.findById(createFlatDTO.getFlatStatusId())
+                .orElseThrow(() -> new NoSuchElementException("Daire durumu bulunamadı!"));
+        flat.setFlatStatus(flatStatus);
 
-        return getAllFlatsOfApartment(apartment.getId());
+        Employee employee = employeeRepository.findById(createFlatDTO.getEmployeeId())
+                .orElseThrow(() -> new NoSuchElementException("Sorumlu personel bulunamadı!"));
+        flat.setEmployee(employee);
+
+        Flat newFlat = flatRepository.saveAndFlush(flat);
+
+        return getFlatApartmentDTOFromEntityMapper.fromEntityToDTO(newFlat.getApartment());
     }
 
     @Override
-    public List<GetFlatDTO> deleteFlat(Integer id) {
+    public GetFlatApartmentDTO deleteFlat(Integer id) {
         Flat flat = flatRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Daire bulunamadı!"));
 
         flatRepository.delete(flat);
 
-        return getAllFlatsOfApartment(flat.getApartment().getId());
+        Apartment apartment = apartmentRepository.findById(flat.getApartment().getId()).orElseThrow();
+
+        return getFlatApartmentDTOFromEntityMapper.fromEntityToDTO(apartment);
     }
 
     @Override
-    public List<GetFlatDTO> updateFlat(UpdateFlatDTO updateFlatDTO) {
+    public GetFlatApartmentDTO updateFlat(UpdateFlatDTO updateFlatDTO) {
         Flat flat = flatRepository.findById(updateFlatDTO.getFlatId())
                 .orElseThrow(() -> new NoSuchElementException("Daire bulunamadı!"));
 
@@ -96,25 +109,23 @@ public class FlatServiceImpl implements FlatService {
                 .orElseThrow(() -> new NoSuchElementException("Daire tipi bulunamadı!"));
         flat.setFlatType(flatType);
 
-        flat.getFlatContact().setContactNameSurname(updateFlatDTO.getContactNameSurname());
-        flat.getFlatContact().setContactAddress(updateFlatDTO.getContactAddress());
-        flat.getFlatContact().setContactEmail(updateFlatDTO.getContactEmail());
-        flat.getFlatContact().setContactIban(updateFlatDTO.getContactIban());
-        flat.getFlatContact().setContactAccountNumber(updateFlatDTO.getContactAccountNumber());
-        flat.getFlatContact().setContactTckn(updateFlatDTO.getContactTckn());
-        flat.getFlatContact().setContactBankBranch(updateFlatDTO.getContactBankBranch());
-        flat.getFlatContact().setContactBankName(updateFlatDTO.getContactBankName());
-        flat.getFlatContact().setContactPhoneNumber(updateFlatDTO.getContactPhoneNumber());
+        List<Owner> owners = ownerRepository.findAllById(updateFlatDTO.getOwnerId());
+        flat.setFlatOwners(owners);
 
-        flatRepository.save(flat);
+        FlatUsage flatUsage = flatUsageRepository.findById(updateFlatDTO.getFlatUsageId())
+                .orElseThrow(() -> new NoSuchElementException("Daire kullanım tipi bulunamadı!"));
+        flat.setFlatUsage(flatUsage);
 
-        return getAllFlatsOfApartment(flat.getApartment().getId());
-    }
+        FlatStatus flatStatus = flatStatusRepository.findById(updateFlatDTO.getFlatStatusId())
+                .orElseThrow(() -> new NoSuchElementException("Daire durumu bulunamadı!"));
+        flat.setFlatStatus(flatStatus);
 
-    @Override
-    public List<GetFlatDTO> getAllFlatsOfApartment(Integer apartmentId) {
-        List<Flat> flats = flatRepository.findAllByApartmentId(apartmentId);
+        Employee employee = employeeRepository.findById(updateFlatDTO.getEmployeeId())
+                .orElseThrow(() -> new NoSuchElementException("Sorumlu personel bulunamadı!"));
+        flat.setEmployee(employee);
 
-        return getFlatDTOFromEntityMapper.fromEntityListToDTOList(flats);
+        Flat updatedFlat = flatRepository.saveAndFlush(flat);
+
+        return getFlatApartmentDTOFromEntityMapper.fromEntityToDTO(updatedFlat.getApartment());
     }
 }

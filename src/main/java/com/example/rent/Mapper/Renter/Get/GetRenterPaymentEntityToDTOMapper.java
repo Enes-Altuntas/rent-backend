@@ -12,6 +12,7 @@ import org.mapstruct.Named;
 public interface GetRenterPaymentEntityToDTOMapper extends BaseEntityMapper<Payment, GetRenterPaymentDTO> {
     @Mapping(source = "id", target = "paymentId")
     @Mapping(source = "flat", target = "address", qualifiedByName = "getAddressFromApartment")
+    @Mapping(source = "flat.id", target = "flatId")
     @Override
     GetRenterPaymentDTO fromEntityToDTO(Payment payment);
 

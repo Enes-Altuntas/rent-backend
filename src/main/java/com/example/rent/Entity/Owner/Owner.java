@@ -1,6 +1,7 @@
 package com.example.rent.Entity.Owner;
 
 import com.example.rent.Entity.Base.BaseEntity;
+import com.example.rent.Entity.Flat.Flat;
 import com.example.rent.Entity.Land.Land;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -24,14 +25,35 @@ public class Owner extends BaseEntity {
     @Column(name = "ID", nullable = false, updatable = false)
     private Integer id;
 
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "NAMESURNAME", nullable = false)
     private String nameSurname;
 
-    @Column(name = "TCKN", nullable = false, unique = true)
+    @Column(name = "EMAIL")
+    private String email;
+
+    @Column(name = "TC_NO", nullable = false, unique = true)
     private String tckn;
 
-    @Column(name = "PHONE_NUMBER")
+    @Column(name = "BANK", nullable = false)
+    private String bankName;
+
+    @Column(name = "BRANCH", nullable = false)
+    private String bankBranch;
+
+    @Column(name = "ACCOUNT_NUMBER", nullable = false)
+    private Integer accountNumber;
+
+    @Column(name = "IBAN", nullable = false, unique = true, length = 26)
+    private String iban;
+
+    @Column(name = "PHONE_NUMBER", nullable = false)
     private String phoneNumber;
+
+    @Column(name = "ADDRESS", nullable = false)
+    private String address;
+
+    @ManyToMany(mappedBy = "flatOwners")
+    private List<Flat> flatList;
 
     @ManyToMany(mappedBy = "owners")
     private List<Land> landList;
