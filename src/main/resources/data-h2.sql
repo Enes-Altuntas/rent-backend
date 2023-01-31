@@ -34,17 +34,17 @@ VALUES (99990, '2022-12-1 12:00:00', '2023-12-1 12:00:00', 10),
        (99993, '2022-12-1 12:00:00', '2023-12-1 12:00:00', 10);
 
 INSERT INTO OWNERS (ID, NAMESURNAME, EMAIL, TC_NO, BANK, BRANCH, ACCOUNT_NUMBER, IBAN, PHONE_NUMBER, ADDRESS)
-VALUES (99990, 'Johny Depp', 'johnydepp@gmail.com', '32728806152', 'Garanti Bankası', 'Bakırköy Şube', 11111111,
+VALUES (99990, 'Sinan Meriç', 'johnydepp@gmail.com', '32728806152', 'Garanti Bankası', 'Bakırköy Şube', 11111111,
         'TR650001001231575410625001', '+905536739260',
         'Osmanağa, Bahariye Cad. Kadıköy Pasajı No:25, 34714 Kadıköy/İstanbul'),
-       (99991, 'Brad Pitt', 'bradpitt@gmail.com', '32728806153', 'ING Bank', 'Yeşilköy Şube', 22222222,
+       (99991, 'Ahmet Meriç', 'bradpitt@gmail.com', '32728806153', 'ING Bank', 'Yeşilköy Şube', 22222222,
         'TR650001001231575410625002', '+905536739261',
         'Acıbadem Mah. Çeçen Sok. Akasya Kule No:25 B2 Blok Kat:6 Daire:71 Üsküdar / İstanbul'),
-       (99992, 'Thor Odinson', 'thorodinson@gmail.com', '32728806154', 'Akbank', 'Kadıköy Şube', 33333333,
+       (99992, 'Mehmet Meriç', 'thorodinson@gmail.com', '32728806154', 'Akbank', 'Kadıköy Şube', 33333333,
         'TR650001001231575410625003', '+905536739262', 'Barbaros, Mor Sumbul Sokagi No:7/3, 34746 Ataşehir/İstanbul'),
-       (99993, 'Loki Odinson', 'lokiodinson@gmail.com', '32728806155', 'Yapı Kredi', 'Üsküdar Şube', 44444444,
+       (99993, 'Murat Meriç', 'lokiodinson@gmail.com', '32728806155', 'Yapı Kredi', 'Üsküdar Şube', 44444444,
         'TR650001001231575410625004', '+905536739263', 'Osmanağa, Halitağa Cd. No:19, 34714 Kadıköy/İstanbul'),
-       (99994, 'Odin Allfather', 'odinallfather@gmail.com', '32728806156', 'ING Bank', 'Florya Şube', 55555555,
+       (99994, 'Bülent Meriç', 'odinallfather@gmail.com', '32728806156', 'ING Bank', 'Florya Şube', 55555555,
         'TR650001001231575410625005', '+905536739264',
         'Ziya Gökalp, Turgut Özal Cd/Bolap Sok İkitelli Sanayi Sitesi, 34306 İkitelli/Başakşehir/İstanbul');
 
@@ -57,7 +57,7 @@ VALUES (99990, '11111111111', 'TR650001001231575410625001', 'Enes Altuntaş', '+
         'mertcannar@gmail.com', true),
        (99993, '44444444444', 'TR650001001231575410625004', 'Furkan Koçhan', '+905536739263', NOW(), 'DENEME4',
         'furkankochan@gmail.com', true),
-       (99994, '55555555555', 'TR650001001231575410625005', 'Yuri Boyka', '+905536739264', NOW(), 'DENEME5',
+       (99994, '55555555555', 'TR650001001231575410625005', 'Ahmet Altan', '+905536739264', NOW(), 'DENEME5',
         'yuriboyka@gmail.com', false);
 
 INSERT INTO FLATS (ID, FLAT_NUMBER, FLAT_PRICE, FLAT_AREA, CREATED_AT, FLATTYPE_ID, CURRENCY_ID, APARTMENT_ID,

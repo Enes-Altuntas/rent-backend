@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.Objects;
 
 @RestController
 @CrossOrigin(origins = {"*"})
@@ -23,26 +22,8 @@ public class DocumentController {
     public ResponseEntity<InputStreamResource> downloadPdf(@PathVariable String type, @PathVariable Integer flatId)
             throws IOException {
 
-        String fileName = "document.pdf";
-
-        if (Objects.equals(type, "NewContract")) {
-            fileName = "Kira Sozlesmesi - " + flatId + ".pdf";
-        } else if (Objects.equals(type, "Evacuation")) {
-            fileName = "Tahliye Taahhutnamesi - " + flatId + ".pdf";
-        } else if (Objects.equals(type, "ContractTermination")) {
-            fileName = "Kontrat Fesih - " + flatId + ".pdf";
-        } else if (Objects.equals(type, "Turnkey")) {
-            fileName = "Tasinmaz ve Anahtar Teslim Tutanagi - " + flatId + ".pdf";
-        } else if (Objects.equals(type, "UnpaidWarning")) {
-            fileName = "Temerrut(Gecmis Kira) İhtarnamesi - " + flatId + ".pdf";
-        } else if (Objects.equals(type, "FifthYearWarning")) {
-            fileName = "5 Yillik Kiraci Kira Tespit - " + flatId + ".pdf";
-        } else if (Objects.equals(type, "TenthYearWarning")) {
-            fileName = "10 Yillik Sozlesme Fesih İhtar - " + flatId + ".pdf";
-        }
-
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "attachment; filename=" + fileName);
+        headers.add("Content-Disposition", "attachment; filename=document.pdf");
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
