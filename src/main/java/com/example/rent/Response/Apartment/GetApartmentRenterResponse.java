@@ -15,8 +15,4 @@ public class GetApartmentRenterResponse {
 
     private String nameSurname;
 
-    private String email;
-
-    private String phoneNumber;
-
 }

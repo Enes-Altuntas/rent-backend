@@ -4,6 +4,7 @@ import com.example.rent.Entity.Base.BaseEntity;
 import com.example.rent.Entity.File.File;
 import com.example.rent.Entity.Flat.Flat;
 import com.example.rent.Entity.Renter.Renter;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import java.util.Date;
 @Table(name = "PAYMENTS")
 @Getter
 @Setter
+@EqualsAndHashCode
 @RequiredArgsConstructor
 public class Payment extends BaseEntity {
 

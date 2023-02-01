@@ -24,7 +24,7 @@ public interface GetPaymentEntityToDTOMapper extends BaseEntityMapper<Payment, G
                 " Sok. " +
                 apartment.getApartmentName() +
                 " Apt. " +
-                "No. " +
+                "No." +
                 apartment.getNumber() +
                 " " +
                 apartment.getState() +

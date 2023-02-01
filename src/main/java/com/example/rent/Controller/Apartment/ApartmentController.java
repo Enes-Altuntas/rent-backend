@@ -6,11 +6,9 @@ import com.example.rent.DTO.Apartment.Update.UpdateApartmentDTO;
 import com.example.rent.Mapper.Apartment.Create.CreateApartmentRequestToDTOMapper;
 import com.example.rent.Mapper.Apartment.Get.GetApartmentResponseFromDTOMapper;
 import com.example.rent.Mapper.Apartment.Update.UpdateApartmentRequestToDTOMapper;
-import com.example.rent.Mapper.Apartment.Update.UpdateApartmentResponseFromDTOMapper;
 import com.example.rent.Request.Apartment.CreateApartmentRequest;
 import com.example.rent.Request.Apartment.UpdateApartmentRequest;
 import com.example.rent.Response.Apartment.GetApartmentResponse;
-import com.example.rent.Response.Apartment.UpdateApartmentResponse;
 import com.example.rent.Service.Apartment.ApartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,18 +26,17 @@ public class ApartmentController {
     private final ApartmentService apartmentService;
     private final CreateApartmentRequestToDTOMapper createApartmentRequestToDTOEntityMapper;
     private final GetApartmentResponseFromDTOMapper getApartmentResponseFromDTOMapper;
-    private final UpdateApartmentResponseFromDTOMapper updateApartmentResponseFromDTOMapper;
     private final UpdateApartmentRequestToDTOMapper updateApartmentRequestToDTOMapper;
 
     @PostMapping
-    public ResponseEntity<GetApartmentResponse> saveApartment(@RequestBody @Valid CreateApartmentRequest createApartmentRequest) {
+    public ResponseEntity<List<GetApartmentResponse>> saveApartment(@RequestBody @Valid CreateApartmentRequest createApartmentRequest) {
         CreateApartmentDTO createApartmentDTO = createApartmentRequestToDTOEntityMapper.fromRequestToDTO(createApartmentRequest);
 
-        GetApartmentDTO apartmentDTO = apartmentService.saveApartment(createApartmentDTO);
+        List<GetApartmentDTO> getApartmentDTOList = apartmentService.saveApartment(createApartmentDTO);
 
-        GetApartmentResponse getApartmentResponse = getApartmentResponseFromDTOMapper.fromDTOToResponse(apartmentDTO);
+        List<GetApartmentResponse> getApartmentResponseList = getApartmentResponseFromDTOMapper.fromDTOListToResponseList(getApartmentDTOList);
 
-        return new ResponseEntity<>(getApartmentResponse, HttpStatus.CREATED);
+        return new ResponseEntity<>(getApartmentResponseList, HttpStatus.OK);
     }
 
     @GetMapping
@@ -52,21 +49,24 @@ public class ApartmentController {
     }
 
     @PutMapping
-    public ResponseEntity<UpdateApartmentResponse> UpdateApartmentDTO(@Valid @RequestBody UpdateApartmentRequest updateApartmentRequest) {
+    public ResponseEntity<List<GetApartmentResponse>> updateApartmentDTO(@Valid @RequestBody UpdateApartmentRequest updateApartmentRequest) {
         UpdateApartmentDTO updateApartmentDTO = updateApartmentRequestToDTOMapper.fromRequestToDTO(updateApartmentRequest);
 
-        UpdateApartmentDTO apartmentDTO = apartmentService.updateApartment(updateApartmentDTO);
+        List<GetApartmentDTO> getApartmentDTOList = apartmentService.updateApartment(updateApartmentDTO);
 
-        UpdateApartmentResponse updateApartmentResponse = updateApartmentResponseFromDTOMapper.fromDTOToResponse(apartmentDTO);
+        List<GetApartmentResponse> getApartmentResponseList = getApartmentResponseFromDTOMapper
+                .fromDTOListToResponseList(getApartmentDTOList);
 
-        return new ResponseEntity<>(updateApartmentResponse, HttpStatus.OK);
+        return new ResponseEntity<>(getApartmentResponseList, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Integer> deleteApartment(@PathVariable Integer id) {
-        apartmentService.deleteApartment(id);
+    public ResponseEntity<List<GetApartmentResponse>> deleteApartment(@PathVariable Integer id) {
+        List<GetApartmentDTO> getApartmentDTOList = apartmentService.deleteApartment(id);
 
-        return new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
+        List<GetApartmentResponse> getApartmentResponseList = getApartmentResponseFromDTOMapper
+                .fromDTOListToResponseList(getApartmentDTOList);
+
+        return new ResponseEntity<>(getApartmentResponseList, HttpStatus.OK);
     }
-
 }

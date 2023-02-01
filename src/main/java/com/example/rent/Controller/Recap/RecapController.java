@@ -2,7 +2,7 @@ package com.example.rent.Controller.Recap;
 
 
 import com.example.rent.DTO.Recap.GetRecapDTO;
-import com.example.rent.Mapper.Recap.GetRecapRentResponseFromDTOMapper;
+import com.example.rent.Mapper.Recap.GetRecapResponseFromDTOMapper;
 import com.example.rent.Response.Recap.GetRecapResponse;
 import com.example.rent.Service.Recap.RecapService;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +20,14 @@ import java.util.List;
 @CrossOrigin(origins = {"*"})
 @RequiredArgsConstructor
 public class RecapController {
-    private final GetRecapRentResponseFromDTOMapper getRecapRentResponseFromDTOMapper;
+    private final GetRecapResponseFromDTOMapper getRecapResponseFromDTOMapper;
     private final RecapService recapService;
 
     @GetMapping()
     public ResponseEntity<List<GetRecapResponse>> getRecap() {
         List<GetRecapDTO> getRecapDTOList = recapService.getRecap();
 
-        List<GetRecapResponse> getRecapResponseList = getRecapRentResponseFromDTOMapper.fromDTOListToResponseList(getRecapDTOList);
+        List<GetRecapResponse> getRecapResponseList = getRecapResponseFromDTOMapper.fromDTOListToResponseList(getRecapDTOList);
 
         return new ResponseEntity<>(getRecapResponseList, HttpStatus.OK);
     }

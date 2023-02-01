@@ -21,7 +21,7 @@ public interface GetPaymentFileEntityToDTOMapper extends BaseEntityMapper<File, 
     default String getURL(Integer id) {
         return ServletUriComponentsBuilder
                 .fromCurrentContextPath()
-                .path("/files/")
+                .path("/api/v1/files/")
                 .path(id.toString())
                 .toUriString();
     }

@@ -2,6 +2,8 @@ package com.example.rent.DTO.Flat.Update;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UpdateFlatDTO {
 
@@ -16,5 +18,13 @@ public class UpdateFlatDTO {
     private String flatArea;
 
     private Integer currencyId;
+
+    private Integer flatStatusId;
+
+    private Integer flatUsageId;
+
+    private Integer employeeId;
+
+    private List<Integer> ownerId;
 
 }

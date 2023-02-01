@@ -7,12 +7,12 @@ import com.example.rent.DTO.Apartment.Update.UpdateApartmentDTO;
 import java.util.List;
 
 public interface ApartmentService {
-    GetApartmentDTO saveApartment(CreateApartmentDTO createApartmentDTO);
+    List<GetApartmentDTO> saveApartment(CreateApartmentDTO createApartmentDTO);
 
-    void deleteApartment(Integer id);
+    List<GetApartmentDTO> deleteApartment(Integer id);
 
     List<GetApartmentDTO> getAllApartments();
 
-    UpdateApartmentDTO updateApartment(UpdateApartmentDTO updateApartmentDTO);
+    List<GetApartmentDTO> updateApartment(UpdateApartmentDTO updateApartmentDTO);
 
 }

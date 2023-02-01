@@ -1,12 +1,11 @@
 package com.example.rent.Response.Recap;
 
-import com.example.rent.Response.Flat.Get.GetFlatRecapResponse;
+import com.example.rent.Response.Employee.GetEmployeeResponse;
+import com.example.rent.Response.FlatStatus.GetFlatStatusResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,12 +13,22 @@ import java.util.List;
 @NoArgsConstructor
 public class GetRecapResponse {
 
+    private Integer flatId;
+
     private Integer renterId;
 
-    private Integer renterCode;
+    private Integer flatNumber;
 
-    private String renterName;
+    private String apartmentName;
 
-    private List<GetFlatRecapResponse> flatList;
+    private String city;
+
+    private String state;
+
+    private String paymentStatus;
+
+    private GetEmployeeResponse employee;
+
+    private GetFlatStatusResponse flatStatus;
 
 }

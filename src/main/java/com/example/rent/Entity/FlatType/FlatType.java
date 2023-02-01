@@ -1,5 +1,6 @@
 package com.example.rent.Entity.FlatType;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "FLAT_TYPES")
 @Getter
 @Setter
+@EqualsAndHashCode
 @RequiredArgsConstructor
 public class FlatType {
 

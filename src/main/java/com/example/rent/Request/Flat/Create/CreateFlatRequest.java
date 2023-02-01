@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -31,5 +32,17 @@ public class CreateFlatRequest {
 
     @NotNull(message = "Daire para birimi boş bırakılamaz!")
     private Integer currencyId;
+
+    @NotNull(message = "Daire tipi boş bırakılamaz!")
+    private Integer flatStatusId;
+
+    @NotNull(message = "Daire kullanım tipi boş bırakılamaz!")
+    private Integer flatUsageId;
+
+    @NotNull(message = "İlgili personel boş bırakılamaz!")
+    private Integer employeeId;
+
+    @NotNull(message = "Daire sahipleri boş bırakılamaz!")
+    private List<Integer> ownerId;
 
 }

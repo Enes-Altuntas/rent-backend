@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-
 @Data
 @AllArgsConstructor
 @Builder
@@ -20,5 +18,23 @@ public class CreateOwnerDTO {
     private String tckn;
 
     private String phoneNumber;
+
+    private String contactNameSurname;
+
+    private String contactEmail;
+
+    private String contactTckn;
+
+    private String contactBankName;
+
+    private String contactBankBranch;
+
+    private Integer contactAccountNumber;
+
+    private String contactIban;
+
+    private String contactPhoneNumber;
+
+    private String contactAddress;
 
 }

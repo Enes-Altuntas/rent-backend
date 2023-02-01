@@ -19,13 +19,15 @@ public class GetRenterResponse {
 
     private String tckn;
 
+    private String iban;
+
     private String nameSurname;
 
     private String email;
 
     private String phoneNumber;
 
-    private boolean isActive;
+    private boolean active;
 
     private List<GetRenterFlatResponse> flatList;
 

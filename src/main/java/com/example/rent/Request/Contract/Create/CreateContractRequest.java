@@ -23,9 +23,6 @@ public class CreateContractRequest {
     @NotNull(message = "Başlangıç tarihi boş bırakılamaz!")
     private Date startDate;
 
-    @NotNull(message = "Bitiş tarihi boş bırakılamaz!")
-    private Date endDate;
-
     @NotNull(message = "Ödeme gecikme gün sayısı boş bırakılamaz!")
     private Integer paymentDue;
 

@@ -15,6 +15,8 @@ public class GetRenterPaymentResponse {
 
     private Integer paymentId;
 
+    private Integer flatId;
+
     private Date paymentDate;
 
     private GetRenterFileResponse file;

@@ -3,6 +3,7 @@ package com.example.rent.Entity.Renter;
 import com.example.rent.Entity.Base.BaseEntity;
 import com.example.rent.Entity.Flat.Flat;
 import com.example.rent.Entity.Payment.Payment;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.List;
 @Table(name = "RENTERS")
 @Getter
 @Setter
+@EqualsAndHashCode
 @RequiredArgsConstructor
 public class Renter extends BaseEntity {
 
@@ -29,7 +31,10 @@ public class Renter extends BaseEntity {
     @Column(name = "TC_NO", nullable = false, unique = true)
     private String tckn;
 
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "IBAN", nullable = false, unique = true, length = 26)
+    private String iban;
+
+    @Column(name = "NAMESURNAME", nullable = false)
     private String nameSurname;
 
     @Column(name = "EMAIL")
@@ -39,7 +44,7 @@ public class Renter extends BaseEntity {
     private String phoneNumber;
 
     @Column(name = "ACTIVE", nullable = false)
-    private boolean isActive = true;
+    private boolean active = true;
 
     @OneToMany(mappedBy = "renter")
     private List<Flat> flatList;

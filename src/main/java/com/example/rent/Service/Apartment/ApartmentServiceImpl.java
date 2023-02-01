@@ -5,7 +5,6 @@ import com.example.rent.DTO.Apartment.Get.GetApartmentDTO;
 import com.example.rent.DTO.Apartment.Update.UpdateApartmentDTO;
 import com.example.rent.Entity.Apartment.Apartment;
 import com.example.rent.Mapper.Apartment.Get.GetApartmentDTOFromEntityMapper;
-import com.example.rent.Mapper.Apartment.Update.UpdateApartmentDTOFromEntityMapper;
 import com.example.rent.Repository.Apartment.ApartmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,11 +20,10 @@ import java.util.NoSuchElementException;
 public class ApartmentServiceImpl implements ApartmentService {
 
     private final ApartmentRepository apartmentRepository;
-    private final UpdateApartmentDTOFromEntityMapper updateApartmentDTOFromEntityMapper;
     private final GetApartmentDTOFromEntityMapper getApartmentDTOFromEntityMapper;
 
     @Override
-    public GetApartmentDTO saveApartment(CreateApartmentDTO createApartmentDTO) {
+    public List<GetApartmentDTO> saveApartment(CreateApartmentDTO createApartmentDTO) {
         Apartment apartment = new Apartment();
 
         apartment.setApartmentName(createApartmentDTO.getApartmentName());
@@ -35,18 +33,19 @@ public class ApartmentServiceImpl implements ApartmentService {
         apartment.setStreetName(createApartmentDTO.getStreetName());
         apartment.setState(createApartmentDTO.getState());
         apartment.setFlatList(new ArrayList<>());
+        apartmentRepository.save(apartment);
 
-        Apartment savedApartment = apartmentRepository.save(apartment);
-
-        return getApartmentDTOFromEntityMapper.fromEntityToDTO(savedApartment);
+        return getAllApartments();
     }
 
     @Override
-    public void deleteApartment(Integer id) {
+    public List<GetApartmentDTO> deleteApartment(Integer id) {
         Apartment apartment = apartmentRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Apartman bulunamadı!"));
 
         apartmentRepository.delete(apartment);
+
+        return getAllApartments();
     }
 
 
@@ -58,7 +57,7 @@ public class ApartmentServiceImpl implements ApartmentService {
     }
 
     @Override
-    public UpdateApartmentDTO updateApartment(UpdateApartmentDTO updateApartmentDTO) {
+    public List<GetApartmentDTO> updateApartment(UpdateApartmentDTO updateApartmentDTO) {
         Apartment apartment = apartmentRepository.findById(updateApartmentDTO.getApartmentId())
                 .orElseThrow(() -> new NoSuchElementException("Apartman bulunamadı!"));
 
@@ -68,10 +67,9 @@ public class ApartmentServiceImpl implements ApartmentService {
         apartment.setNeighborhood(updateApartmentDTO.getNeighborhood());
         apartment.setState(updateApartmentDTO.getState());
         apartment.setStreetName(updateApartmentDTO.getStreetName());
+        apartmentRepository.save(apartment);
 
-        Apartment updatedApartment = apartmentRepository.save(apartment);
-
-        return updateApartmentDTOFromEntityMapper.fromEntityToDTO(updatedApartment);
+        return getAllApartments();
     }
 
 
