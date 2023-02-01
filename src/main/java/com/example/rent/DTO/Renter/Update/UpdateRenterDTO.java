@@ -15,6 +15,8 @@ public class UpdateRenterDTO {
 
     private String tckn;
 
+    private String code;
+
     private String nameSurname;
 
     private String email;
